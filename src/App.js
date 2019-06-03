@@ -21,7 +21,7 @@ class App extends React.Component {
           {
             this.state.list.map((item,index) => {
               return (
-                <li key={index}>{item}</li>
+                <li key={index} onClick={this.handleItemDelete.bind(this,index)}>{item}</li>
               )
             })
           }
@@ -41,6 +41,14 @@ class App extends React.Component {
       list: [...this.state.list,this.state.inputValue],
       inputValue: ''
     })
+  }
+
+  handleItemDelete(index) {
+      const list = [...this.state.list]
+      list.splice(index,1)
+      this.setState({
+        list: list
+      })
   }
   
 }
