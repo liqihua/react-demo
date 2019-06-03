@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import './App.css'
 
 class App extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class App extends React.Component {
       <Fragment>
         123{this.props.name}
         <div>
-          <input value={this.state.inputValue} onChange={this.handleInputChange.bind(this)}/>
+          <label htmlFor="myInput">输入内容</label>
+          <input id="myInput" className='input' value={this.state.inputValue} onChange={this.handleInputChange.bind(this)}/>
           <button onClick={this.handleBtnClick.bind(this)}>提交</button>
         </div>
         <ul>
