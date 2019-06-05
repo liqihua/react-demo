@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import './App.css'
+import Item from './Item'
 
 class App extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class App extends React.Component {
           {
             this.state.list.map((item,index) => {
               return (
-                <li key={index} onClick={this.handleItemDelete.bind(this,index)}>{item}</li>
+                <Item key={index} content={item} index={index} deleteItem={this.handleItemDelete.bind(this)}/>
               )
             })
           }
