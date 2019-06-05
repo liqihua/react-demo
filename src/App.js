@@ -9,6 +9,10 @@ class App extends React.Component {
       inputValue: '',
       list: []
     }
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleBtnClick = this.handleBtnClick.bind(this)
+    this.handleItemDelete = this.handleItemDelete.bind(this)
+
   }
 
   render() {
@@ -17,21 +21,25 @@ class App extends React.Component {
         123{this.props.name}
         <div>
           <label htmlFor="myInput">输入内容</label>
-          <input id="myInput" className='input' value={this.state.inputValue} onChange={this.handleInputChange.bind(this)}/>
-          <button onClick={this.handleBtnClick.bind(this)}>提交</button>
+          <input id="myInput" className='input' value={this.state.inputValue} onChange={this.handleInputChange}/>
+          <button onClick={this.handleBtnClick}>提交</button>
         </div>
         <ul>
-          {
-            this.state.list.map((item,index) => {
-              return (
-                <Item key={index} content={item} index={index} deleteItem={this.handleItemDelete.bind(this)}/>
-              )
-            })
-          }
+          { this.showItem() }
         </ul>
       </Fragment>
     );
   }
+
+
+  showItem() {
+    return this.state.list.map((item,index) => {
+      return (
+        <Item key={index} content={item} index={index} deleteItem={this.handleItemDelete}/>
+      )
+    })
+  }
+
 
   handleInputChange(e) {
     this.setState({
