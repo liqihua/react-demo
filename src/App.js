@@ -12,7 +12,6 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleBtnClick = this.handleBtnClick.bind(this)
     this.handleItemDelete = this.handleItemDelete.bind(this)
-
   }
 
   render() {
@@ -21,10 +20,10 @@ class App extends React.Component {
         123{this.props.name}
         <div>
           <label htmlFor="myInput">输入内容</label>
-          <input id="myInput" className='input' value={this.state.inputValue} onChange={this.handleInputChange}/>
+          <input ref={ (input) => this.input = input } id="myInput" className='input' value={this.state.inputValue} onChange={this.handleInputChange}/>
           <button onClick={this.handleBtnClick}>提交</button>
         </div>
-        <ul>
+        <ul ref={ (ul) => this.ul = ul }>
           { this.showItem() }
         </ul>
       </Fragment>
@@ -42,12 +41,16 @@ class App extends React.Component {
 
 
   handleInputChange(e) {
+    console.log(e.target)
+    console.log(this.input)
     this.setState({
-      inputValue: e.target.value
+      // inputValue: e.target.value
+      inputValue: this.input.value
     })
   }
 
   handleBtnClick() {
+    console.log(this.ul)
     this.setState({
       list: [...this.state.list,this.state.inputValue],
       inputValue: ''
