@@ -41,8 +41,8 @@ class App extends React.Component {
 
 
   handleInputChange(e) {
-    console.log(e.target)
-    console.log(this.input)
+    //console.log(e.target)
+    //console.log(this.input)
     this.setState({
       // inputValue: e.target.value
       inputValue: this.input.value
@@ -50,10 +50,11 @@ class App extends React.Component {
   }
 
   handleBtnClick() {
-    console.log(this.ul)
     this.setState({
       list: [...this.state.list,this.state.inputValue],
       inputValue: ''
+    },() => {
+      console.log(this.ul.querySelectorAll('div').length)
     })
   }
 
