@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
-import './App.css'
 import Item from './Item'
+import axios from 'axios'
+import './App.css'
 
 class App extends React.Component {
   constructor(props) {
@@ -12,17 +13,10 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleBtnClick = this.handleBtnClick.bind(this)
     this.handleItemDelete = this.handleItemDelete.bind(this)
-    console.log('finish constructor')
-  }
-
-  // 组件即将被挂载到页面时被执行
-  componentWillMount() {
-    console.log('componentWillMount')
   }
 
   // 组件被渲染
   render() {
-    console.log('render')
     return (
       <Fragment>
         123{this.props.name}
@@ -40,28 +34,16 @@ class App extends React.Component {
 
   // 组件被挂载到页面后被执行
   componentDidMount() {
-    console.log('componentDidMount')
-  }
-
-  // 组件 props 变量被修改的时候被执行
-  componentWillReceiveProps() {
-    console.log('componentWillReceiveProps')
-  }
-
-  // 组件被更新前执行，返回是否需要执行后面的生命周期函数
-  shouldComponentUpdate() {
-    console.log('shouldComponentUpdate')
-    return true
-  }
-
-  // 组件被更新之间被执行
-  componentWillUpdate() {
-    console.log('componentWillUpdate')
-  }
-  
-  // 组件被更新后被执行
-  componentDidUpdate() {
-    console.log('componentDidUpdate')
+    axios.post('/api/list')
+    .then((res) => {
+      console.log(res.data)
+      this.setState({
+        list: [...res.data]
+      })
+    })
+    .catch(() => {
+      console.log('error')
+    })
   }
 
 
