@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import Item from './Item'
 import axios from 'axios'
 import './App.css'
+import store from './store'
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,8 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleBtnClick = this.handleBtnClick.bind(this)
     this.handleItemDelete = this.handleItemDelete.bind(this)
+    console.log(store.getState())
+    this.state = store.getState()
   }
 
   // 组件被渲染
@@ -34,16 +37,16 @@ class App extends React.Component {
 
   // 组件被挂载到页面后被执行
   componentDidMount() {
-    axios.post('/api/list')
-    .then((res) => {
-      console.log(res.data)
-      this.setState({
-        list: [...res.data]
-      })
-    })
-    .catch(() => {
-      console.log('error')
-    })
+    // axios.post('/api/list')
+    // .then((res) => {
+    //   console.log(res.data)
+    //   this.setState({
+    //     list: [...res.data]
+    //   })
+    // })
+    // .catch(() => {
+    //   console.log('error')
+    // })
   }
 
 
