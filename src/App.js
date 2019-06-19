@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import Item from './Item'
-import axios from 'axios'
+//import axios from 'axios'
 import './App.css'
 import store from './store'
 
@@ -14,8 +14,10 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleBtnClick = this.handleBtnClick.bind(this)
     this.handleItemDelete = this.handleItemDelete.bind(this)
-    console.log(store.getState())
+    this.handleStoreChange = this.handleStoreChange.bind(this)
+    //console.log(store.getState())
     this.state = store.getState()
+    store.subscribe(this.handleStoreChange)
   }
 
   // 组件被渲染
@@ -60,29 +62,30 @@ class App extends React.Component {
 
 
   handleInputChange(e) {
-    //console.log(e.target)
-    //console.log(this.input)
-    this.setState({
-      // inputValue: e.target.value
-      inputValue: this.input.value
-    })
+    const action = {
+      type: 'change_input_value',
+      value: e.target.value
+    }
+    store.dispatch(action);
+  }
+
+  handleStoreChange() {
+    this.setState(store.getState())
   }
 
   handleBtnClick() {
-    this.setState({
-      list: [...this.state.list,this.state.inputValue],
-      inputValue: ''
-    },() => {
-      //console.log(this.ul.querySelectorAll('div').length)
-    })
+    const action = {
+      type: 'add_item'
+    }
+    store.dispatch(action);
   }
 
   handleItemDelete(index) {
-      const list = [...this.state.list]
-      list.splice(index,1)
-      this.setState({
-        list: list
-      })
+    const action = {
+      type: 'delete_item',
+      index
+    }
+    store.dispatch(action);
   }
   
 }
