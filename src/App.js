@@ -3,6 +3,8 @@ import Item from './Item'
 //import axios from 'axios'
 import './App.css'
 import store from './store'
+//import {CHANGE_INPUT_TYPE, ADD_ITEM, DELETE_ITEM} from './store/actionTypes'
+import {getInputChangeAction, getAddItemAction, getDeleteItemAction} from './store/actionCreator'
 
 class App extends React.Component {
   constructor(props) {
@@ -60,31 +62,22 @@ class App extends React.Component {
     })
   }
 
-
-  handleInputChange(e) {
-    const action = {
-      type: 'change_input_value',
-      value: e.target.value
-    }
-    store.dispatch(action);
-  }
-
   handleStoreChange() {
     this.setState(store.getState())
   }
 
+  handleInputChange(e) {
+    const action = getInputChangeAction(e.target.value)
+    store.dispatch(action);
+  }
+
   handleBtnClick() {
-    const action = {
-      type: 'add_item'
-    }
+    const action = getAddItemAction()
     store.dispatch(action);
   }
 
   handleItemDelete(index) {
-    const action = {
-      type: 'delete_item',
-      index
-    }
+    const action = getDeleteItemAction(index)
     store.dispatch(action);
   }
   
