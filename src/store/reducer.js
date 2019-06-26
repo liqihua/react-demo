@@ -22,6 +22,5 @@ export default (state = defaultState, action) => {
         newState.list.splice(action.index, 1)
         return newState;
     }
-    console.log(state, action)
     return state;
 }
