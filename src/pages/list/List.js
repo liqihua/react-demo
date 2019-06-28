@@ -14,7 +14,7 @@ class List extends React.Component {
       <Fragment>
         <div>
           <label htmlFor="myInput">输入内容</label>
-          <input ref={ (input) => this.input = input } id="myInput" value={this.props.list.inputValue} onChange={this.props.handleInputChange}/>
+          <input ref={ (input) => this.input = input } id="myInput" value={this.props.inputValue} onChange={this.props.handleInputChange}/>
           <button onClick={this.props.handleBtnClick}>提交</button>
         </div>
         <ul ref={ (ul) => this.ul = ul }>
@@ -25,7 +25,7 @@ class List extends React.Component {
   }
 
   showItem() {
-    return this.props.list.list.map((item,index) => {
+    return this.props.list.map((item,index) => {
       return (
         <Item key={index} content={item} index={index} deleteItem={this.props.handleItemDelete}/>
       )
@@ -36,8 +36,14 @@ class List extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    inputValue: state.inputValue,
-    list: state.list
+    // inputValue: state.inputValue,
+    // list: state.list
+    inputValue: state.list.inputValue,
+    list: state.list.list
+
+
+    // inputValue: state.get('inputValue'),
+    // list: state.get('list')
   }
 }
 
