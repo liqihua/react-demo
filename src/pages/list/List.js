@@ -1,4 +1,3 @@
-
 import React, {Fragment} from 'react';
 import Item from './Item'
 import {getInputChangeAction, getAddItemAction, getDeleteItemAction} from './store/actionCreator'
@@ -36,14 +35,14 @@ class List extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    // inputValue: state.inputValue,
-    // list: state.list
-    inputValue: state.list.inputValue,
-    list: state.list.list
-
-
-    // inputValue: state.get('inputValue'),
-    // list: state.get('list')
+    // inputValue: state.list.inputValue,
+    // list: state.list.list
+    // inputValue: state.list.get('inputValue'),
+    // list: state.list.get('list')
+    // inputValue: state.get('list').get('inputValue'),
+    // list: state.get('list').get('list')
+    inputValue: state.getIn(['list','inputValue']),
+    list: state.getIn(['list','list'])
   }
 }
 
@@ -64,6 +63,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
-//export default List;
 export default connect(mapStateToProps, mapDispatchToProps)(List);
